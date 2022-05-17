@@ -1,4 +1,11 @@
 import socket
+import threading
+
+def handle(client_socket):
+    data = client_socket.recv(1024)
+    print(data)
+    client_socket.sendall(data)
+    client_socket.close()
 
 
 s = socket.socket()
@@ -8,9 +15,9 @@ print('жду подключений')
 while True:
     client_socket, client_address = s.accept()
     print('connected', client_address)
-    data = client_socket.recv(1024)
-    print(data)
-    client_socket.sendall(data)
-    client_socket.close()
+
+    t = threading.Thread(target=handle, args=(client_socket, ))
+    t.start()
+
 s.close()
 
