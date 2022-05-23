@@ -2,10 +2,19 @@ import socket
 import threading
 
 def handle(client_socket):
-    data = client_socket.recv(1024)
-    print(data)
-    client_socket.sendall(data)
-    client_socket.close()
+    try:
+        while True:
+            data = client_socket.recv(1024)
+            if data == b'':
+                client_socket.close()
+                print("break")
+                break
+            else:
+                print(data)
+                client_socket.sendall(data)
+    except:
+        client_socket.close()
+        print("Ошибка разорвала соединение")
 
 
 s = socket.socket()
