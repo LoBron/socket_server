@@ -7,7 +7,7 @@ def client():
     print('connected')
     n = 1
     while True:
-        s.sendall(('00-'+str(n)).encode(encoding='UTF-8'))
+        s.sendall(('01-'+str(n)).encode(encoding='UTF-8'))
         data = s.recv(1024)
         print(data)
         time.sleep(2)
