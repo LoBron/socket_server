@@ -1,11 +1,12 @@
 import socket
 import threading
+import select
 
 def handle(client, address):
     try:
         while True:
             data = client.recv(1024)
-            if data == b'':
+            if not data:
                 client.close()
                 print("break")
                 break
@@ -17,6 +18,7 @@ def handle(client, address):
 
 
 s = socket.socket()
+s.setblocking(False)
 s.bind(('127.0.0.1', 4000))
 s.listen(5)
 print('жду подключений')
