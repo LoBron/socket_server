@@ -16,6 +16,21 @@ def handle(client):
         client.close()
         print(ex)
 
+def HTTP_handle(request):
+    """Упрощённая модель контроллера"""
+    ...
+    db = connect() # неблокирующее соединение с базой
+    return callback_0(db)
+
+def callback_0(db):
+    ...
+    row = db.query() #какие-то данные из бвзы
+    return callback_1(row)
+
+def callback_1(row):
+    ...
+    db.close()
+    return render(row)
 
 s = socket.socket()
 s.setblocking(False)
