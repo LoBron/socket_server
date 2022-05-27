@@ -13,11 +13,11 @@ def client(k:int):
     while True:
         s.sendall(f'client_{k} - {str(n)}'.encode(encoding='UTF-8'))
         data = s.recv(1024)
-        print(data)
+        print(data.decode(encoding='UTF-8'))
         time.sleep(random.randrange(0, 5))
         n += 1
 
 
 
-amount = 5
+amount = 2
 clients = [Thread(target=client, args=(i,)).start() for i in range(amount)]
